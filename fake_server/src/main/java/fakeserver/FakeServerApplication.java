@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = { "http://127.0.0.1:8001", "http://localhost:8001" })
+@CrossOrigin(origins = { "http://127.0.0.1:8001", "http://localhost:8001", "http://127.0.0.1:8000" })
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan({"fakeserver.controller", "fakeserver.service"})
