@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = { "http://127.0.0.1:8000", "http://localhost:8000" })
+@CrossOrigin(origins = { "http://127.0.0.1:8000", "http://localhost:8000",  "http://127.0.0.1:8001" })
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan({"solkka.controller"})
+@ComponentScan({"solkka.controller","solkka.service", "solkka.model.*"})
 public class SolkkaApplication {
 
 	public static void main(String[] args) {
