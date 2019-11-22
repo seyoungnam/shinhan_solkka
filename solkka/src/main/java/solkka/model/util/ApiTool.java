@@ -1,6 +1,7 @@
 package solkka.model.util;
 
 import java.net.URI;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,25 +25,24 @@ public class ApiTool {
 	@Value("${api.name}")
 	private String NAME;
 
-	// 예: http://10.3.17.61:8080/v2/stocks/balance-check (post)
-	public JSONObject callApi(JSONObject input) throws RestClientException, ParseException {
-		System.out.println(makeURI(input));
+	public JSONObject callApi(String cat, String name, String method, Map<String, Object> dataMap) throws RestClientException, ParseException {
+		System.out.println("** 분류 : " + cat + " / API 기능명 : " + name);
+		String uri = makeURI(cat, name, dataMap);
+		System.out.println("** URI : " + uri);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<JSONObject> request = new HttpEntity<>(input, headers);
+		HttpEntity<JSONObject> request = new HttpEntity<>(new JSONObject(dataMap), headers);
 		ResponseEntity<JSONObject> response = (new RestTemplate()).exchange(
-				URI.create(
-						makeURI(input)),
-				HttpMethod.POST, request, JSONObject.class);
+				URI.create(uri), method.equals("post") ? HttpMethod.POST : HttpMethod.GET, request, JSONObject.class);
 		return response.getBody();
 	}
 	
-	public String makeURI(JSONObject input) throws ParseException {
-		System.out.println(input);
+	public String makeURI(String cat, String name, Map<String, Object> dataMap) throws ParseException {
+		System.out.println("** 요청 데이터 : "+ new JSONObject(dataMap));
 		return new StringBuilder()
 				.append(IP).append(":")
-				.append(((JSONObject) (new JSONParser().parse(PORT))).get(input.get("cat").toString()).toString())
-				.append(((JSONObject) (new JSONParser().parse(NAME))).get(input.get("name").toString()).toString())
+				.append(((JSONObject) (new JSONParser().parse(PORT))).get(cat).toString()).append("/")
+				.append(((JSONObject) (new JSONParser().parse(NAME))).get(name).toString())
 				.toString();
 	}
 }
