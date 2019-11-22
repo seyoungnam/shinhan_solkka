@@ -221,4 +221,37 @@ public class SolkkaService {
 		System.out.println("** 송출 데이터 : " + result);
 		return result;
 	}
+//	[자산 계좌별 현황] {"account":"1234567890"}
+	public JSONObject assetAcc(String number) throws RestClientException, ParseException {
+//		{"dataHeader":{},"dataBody":{"acct_no":"01234567890"}}
+		Map<String, Object> dataBodyMap = new HashMap<>();
+		dataBodyMap.put("acct_no", number);
+		Map<String, Object> dataMap = new HashMap<>();
+		dataMap.put("dataHeader", new JSONObject());
+		dataMap.put("dataBody", dataBodyMap);
+//		http://10.3.17.61:8082/v1/asst/acct
+		JSONObject result = apiTool.callApi("fin", "assetAcc", "post", dataMap);
+		System.out.println("** 송출 데이터 : " + result);
+		return result;
+	}
+//	[대출계좌내역 / 계좌정보 상세조회] {"account":"1234567890"}
+	public JSONObject accountLoan(String number) throws RestClientException, ParseException {
+//		{"dataHeader":{},"dataBody":{"업무구분":"01","고객번호":"0741831215","은행구분":"1","계좌번호":"110180148200","조회기간구분":"1","조회시작일":"20190925","조회종료일":"20190925","정렬구분":"1"}}
+		Map<String, Object> dataBodyMap = new HashMap<>();
+		dataBodyMap.put("업무구분", "01");
+		dataBodyMap.put("고객번호", "0741831215");
+		dataBodyMap.put("은행구분", "1");
+		dataBodyMap.put("계좌번호", number);
+		dataBodyMap.put("조회기간구분", "1");
+		dataBodyMap.put("조회시작일", "20190925");
+		dataBodyMap.put("조회종료일", "20190925");
+		dataBodyMap.put("정렬구분", "1");
+		Map<String, Object> dataMap = new HashMap<>();
+		dataMap.put("dataHeader", new JSONObject());
+		dataMap.put("dataBody", dataBodyMap);
+//		http://10.3.17.61:8080/v1/account/loan/detail
+		JSONObject result = apiTool.callApi("bank", "accountLoan", "post", dataMap);
+		System.out.println("** 송출 데이터 : " + result);
+		return result;
+	}
 }
