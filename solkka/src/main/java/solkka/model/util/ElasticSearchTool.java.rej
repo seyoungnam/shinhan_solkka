@@ -1,0 +1,10 @@
+diff a/solkka/src/main/java/solkka/model/util/ElasticSearchTool.java b/solkka/src/main/java/solkka/model/util/ElasticSearchTool.java	(rejected hunks)
+@@ -55,7 +55,7 @@
+ 		BulkRequest request = new BulkRequest();
+ 		dataList.stream().forEach(v -> request.add(new IndexRequest(index).source(v, XContentType.JSON)));
+ 		client.bulk(request, RequestOptions.DEFAULT);
+-		return true;
++		return true; 
+ 	}
+ 
+ 	public List<String> search(String index, Map<String, String> queries) throws IOException {
