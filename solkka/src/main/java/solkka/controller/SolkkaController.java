@@ -46,4 +46,48 @@ public class SolkkaController {
 		System.out.println("** 수신 데이터 : "+ body);
 		return service.stockRemq(body.get("account").toString()); // 계좌번호
 	}
+	
+	// 동성
+	@PostMapping("/accountIsa")
+	public JSONObject accountIsa(@RequestBody JSONObject body) throws RestClientException, ParseException{
+		System.out.println("// accountIsa");
+		System.out.println("** 수신 데이터 : "+ body);
+		return service.accountIsa(body.get("account").toString()); // 계좌번호 
+	}
+	@PostMapping("/stockCntrList")
+	public JSONObject stockCntrList(@RequestBody JSONObject body) throws RestClientException, ParseException {
+		System.out.println("// stockCntrList");
+		System.out.println("** 수신 데이터 : "+ body);
+		return service.stockCntrList(body.get("account").toString(), body.get("ordDate").toString()); // 계좌번호
+	}
+	@PostMapping("/loanStatus")
+	public JSONObject loanStatus(@RequestBody JSONObject body) throws RestClientException, ParseException {
+		System.out.println("// loanStatus");
+		System.out.println("** 수신 데이터 : "+ body);
+		return service.loanStatus(body.get("customer").toString()); // 계좌번호
+	}
+	@PostMapping("/assetStatus")
+	public JSONObject assetStatus(@RequestBody JSONObject body) throws RestClientException, ParseException {
+		System.out.println("// assetStatus");
+		System.out.println("** 수신 데이터 : "+ body);
+		return service.assetStatus(body.get("customer").toString()); // 계좌번호
+	}
+	@PostMapping("/usedDebit")
+	public JSONObject usedDebit(@RequestBody JSONObject body) throws RestClientException, ParseException {
+		System.out.println("// usedDebit");
+		System.out.println("** 수신 데이터 : "+ body);
+		return service.usedDebit(body.get("period").toString()); // 계좌번호
+	}
+	@PostMapping("/usedCredit")
+	public JSONObject usedCredit(@RequestBody JSONObject body) throws RestClientException, ParseException {
+		System.out.println("// usedCredit");
+		System.out.println("** 수신 데이터 : "+ body);
+		return service.usedCredit(body.get("period").toString()); // 계좌번호
+	}
+	@PostMapping("/loanList")
+	public JSONObject loanList(@RequestBody JSONObject body) throws RestClientException, ParseException {
+		System.out.println("// loanList");
+		System.out.println("** 수신 데이터 : "+ body);
+		return service.loanList(body.get("number").toString()); // 주민등록번호
+	}
 }
