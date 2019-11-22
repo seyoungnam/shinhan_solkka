@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
-
 import solkka.service.SolkkaService;
 
 @RestController
@@ -46,6 +45,5 @@ public class SolkkaController {
 		System.out.println("// stockRemq");
 		System.out.println("** 수신 데이터 : "+ body);
 		return service.stockRemq(body.get("account").toString()); // 계좌번호
-
 	}
 }

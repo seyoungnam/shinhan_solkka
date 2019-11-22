@@ -1,10 +1,10 @@
 package solkka.service;
 
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -16,7 +16,7 @@ public class SolkkaService {
 	@Autowired
 	ApiTool apiTool;
 //	[전체 계좌 조회] {"number":"901212-1*****"}
-	public JSONObject accountList(String number) throws RestClientException, ParseException, org.json.simple.parser.ParseException {
+	public JSONObject accountList(String number) throws RestClientException, ParseException {
 //		{"dataHeader":{},"dataBody":{"serviceCode":"C2010","거래구분":"9","계좌감추기여부":"1","보안계좌조회구분":"2","주민등록번호":"WmokLBDCO9/yfihlYoJFyg=="}}
 		Map<String, Object> dataBodyMap = new HashMap<>();
 		dataBodyMap.put("serviceCode", "C2010");

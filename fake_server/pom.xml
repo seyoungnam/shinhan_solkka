@@ -9,10 +9,10 @@
 		<version>2.2.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>solkka</groupId>
-	<artifactId>solkka</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>fake_server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>solkka</name>
+	<name>fake_server</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -33,11 +33,6 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -53,11 +48,6 @@
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>elasticsearch-rest-high-level-client</artifactId>
-			<version>7.1.1</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 	</dependencies>
 
