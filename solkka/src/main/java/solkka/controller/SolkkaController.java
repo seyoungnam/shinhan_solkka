@@ -1,13 +1,13 @@
 package solkka.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
 
 import solkka.service.SolkkaService;
 
@@ -15,12 +15,6 @@ import solkka.service.SolkkaService;
 public class SolkkaController {
 	@Autowired
 	SolkkaService service;
-	
-	@PostMapping("/apiTest")
-	public JSONObject apiTest(@RequestBody JSONObject body) throws Exception {
-		System.out.println("API TEST");
-		return service.callApi(body);
-	}
 	
 	@PostMapping("/sign")
 	public void singUp(@RequestParam("signUp") String signUp) throws Exception {
@@ -31,5 +25,12 @@ public class SolkkaController {
 	public void logIn(@RequestParam("logIn") String logIn) throws Exception {
 		System.out.println(logIn);
 		System.out.println("logIn TEST");
+	}
+
+	@PostMapping("/accountList")
+	public JSONObject accountList(@RequestBody JSONObject body) throws RestClientException, ParseException {
+		System.out.println("// accountList");
+		System.out.println(body);
+		return service.accountList(body.get("number").toString());
 	}
 }
