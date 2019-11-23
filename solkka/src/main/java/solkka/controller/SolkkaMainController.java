@@ -60,4 +60,14 @@ public class SolkkaMainController {
 	public JSONArray getStockDataCouple(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
 		return mainService.getStockDataCouple(body.get("userId1").toString(), body.get("userId2").toString());
 	}
+	// 바디 : {"userId":"girl2019"}
+	@PostMapping("/getCardRcmd")
+	public JSONArray getCardRcmd(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
+		return mainService.getCardRcmd(body.get("userId").toString());
+	}
+	// 바디 : "userId1":"girl2019", "userId2":"boy2019"}
+	@PostMapping("/getCardRcmdCouple")
+	public JSONArray getCardRcmdCouple(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
+		return mainService.getCardRcmdCouple(body.get("userId1").toString(), body.get("userId2").toString());
+	}
 }

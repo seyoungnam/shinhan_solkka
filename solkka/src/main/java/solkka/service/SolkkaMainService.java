@@ -3,13 +3,18 @@ package solkka.service;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import org.apache.jasper.tagplugins.jstl.core.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -26,7 +31,7 @@ public class SolkkaMainService {
 	SolkkaAPIService apiService;
 	@Autowired
 	ElasticSearchTool searchTool;
-	
+
 	public Date calMonth(Date date, int months) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
@@ -39,34 +44,42 @@ public class SolkkaMainService {
 		String today = new SimpleDateFormat("yyyyMMdd").format(new Date());
 		String before = new SimpleDateFormat("yyyyMMdd").format(calMonth(new Date(), -3));
 		List<CardDataDTO> result = new ArrayList<>();
-		System.out.println(apiService.usedDebit(before + today));;
+		System.out.println(apiService.usedDebit(before + today));
+		;
 		result.addAll(searchTool.searchIdAndDate("sample_card_credit", "userId", userId, "apprvDate", before));
-		System.out.println(apiService.usedCredit(before + today));;
+		System.out.println(apiService.usedCredit(before + today));
+		;
 		result.addAll(searchTool.searchIdAndDate("sample_card_deposit", "userId", userId, "apprvDate", before));
 		// 최근 순으로 정렬한다
 		result.sort((v1, v2) -> Integer.parseInt(v2.getApprvDate()) - Integer.parseInt(v1.getApprvDate()));
 		return result;
 	}
 
-	public List<CardDataDTO> getCardDataCouple(String userId1, String userId2) throws IOException, RestClientException, ParseException {
+	public List<CardDataDTO> getCardDataCouple(String userId1, String userId2)
+			throws IOException, RestClientException, ParseException {
 		// API를 호출하면서 실제적으로 Sample Data를 호출한다
 		String today = new SimpleDateFormat("yyyyMMdd").format(new Date());
 		String before = new SimpleDateFormat("yyyyMMdd").format(calMonth(new Date(), -3));
 		List<CardDataDTO> result = new ArrayList<>();
-		System.out.println(apiService.usedCredit(before + today));;
+		System.out.println(apiService.usedCredit(before + today));
+		;
 		result.addAll(searchTool.searchIdAndDate("sample_card_credit", "userId", userId1, "apprvDate", before));
-		System.out.println(apiService.usedCredit(before + today));;
+		System.out.println(apiService.usedCredit(before + today));
+		;
 		result.addAll(searchTool.searchIdAndDate("sample_card_credit", "userId", userId2, "apprvDate", before));
-		System.out.println(apiService.usedDebit(before + today));;
+		System.out.println(apiService.usedDebit(before + today));
+		;
 		result.addAll(searchTool.searchIdAndDate("sample_card_deposit", "userId", userId1, "apprvDate", before));
-		System.out.println(apiService.usedDebit(before + today));;
+		System.out.println(apiService.usedDebit(before + today));
+		;
 		result.addAll(searchTool.searchIdAndDate("sample_card_deposit", "userId", userId2, "apprvDate", before));
 		// 최근 순으로 정렬한다
 		result.sort((v1, v2) -> Integer.parseInt(v2.getApprvDate()) - Integer.parseInt(v1.getApprvDate()));
 		return result;
 	}
-	
-	public JSONObject getExpanseRate(String userId, int income) throws RestClientException, ParseException, IOException {
+
+	public JSONObject getExpanseRate(String userId, int income)
+			throws RestClientException, ParseException, IOException {
 		Map<String, Object> one = new HashMap<>();
 		one.put("01", 0.164);
 		one.put("02", 0.014);
@@ -138,43 +151,44 @@ public class SolkkaMainService {
 		rateDict.put("3", three);
 		rateDict.put("4", four);
 		rateDict.put("5", five);
-		
+
 		List<CardDataDTO> cardData = getCardData(userId);
 		Map<String, Object> map = new HashMap<>();
 		String cat = null;
-		for(CardDataDTO dto : cardData) {
+		for (CardDataDTO dto : cardData) {
 			cat = dto.getCat();
 			int amount = dto.getApprvAmount();
 			map.putIfAbsent(cat, 0);
 			map.put(cat, (Integer) map.get(cat) + amount);
 		}
-		int[] arr1 = {475051, 1602661, 2616274, 3883077, 7113321};
-		int[] arr2 = {1318021, 2099722, 2560559, 3114833, 3985476};
+		int[] arr1 = { 475051, 1602661, 2616274, 3883077, 7113321 };
+		int[] arr2 = { 1318021, 2099722, 2560559, 3114833, 3985476 };
 		int j = 0;
 		Map<String, Object> standard = null;
-		for(int i = 1; i < arr1.length; i++) {
-			if(arr1[i] > income) {
-				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+1));
-				j = i - 1 ;
+		for (int i = 1; i < arr1.length; i++) {
+			if (arr1[i] > income) {
+				standard = (Map<String, Object>) rateDict.get(String.valueOf(i + 1));
+				j = i - 1;
 			} else if (i == 4) {
-				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+2));
+				standard = (Map<String, Object>) rateDict.get(String.valueOf(i + 2));
 				j = i;
 			}
 		}
-		
+
 		JSONObject object = new JSONObject();
 		ArrayList<Double> list = null;
-		for(Entry<String, Object> ent : map.entrySet()) {
+		for (Entry<String, Object> ent : map.entrySet()) {
 			list = new ArrayList<>();
 			double db = (double) ((Integer) ent.getValue()).intValue();
 			list.add(db / 3);
-			list.add((Double) standard.get(ent.getKey()) * income / arr1[j] * arr2[j]); 
+			list.add((Double) standard.get(ent.getKey()) * income / arr1[j] * arr2[j]);
 			object.put(ent.getKey(), list);
 		}
 		return object;
 	}
-	
-	public JSONObject getExpanseRateCouple(String userId1, String userId2, int incomeSum) throws RestClientException, ParseException, IOException {
+
+	public JSONObject getExpanseRateCouple(String userId1, String userId2, int incomeSum)
+			throws RestClientException, ParseException, IOException {
 		Map<String, Object> one = new HashMap<>();
 		one.put("01", 0.164);
 		one.put("02", 0.014);
@@ -246,75 +260,155 @@ public class SolkkaMainService {
 		rateDict.put("3", three);
 		rateDict.put("4", four);
 		rateDict.put("5", five);
-		
+
 		List<CardDataDTO> cardData = getCardDataCouple(userId1, userId2);
 		Map<String, Object> map = new HashMap<>();
 		String cat = null;
-		for(CardDataDTO dto : cardData) {
+		for (CardDataDTO dto : cardData) {
 			cat = dto.getCat();
 			int amount = dto.getApprvAmount();
 			map.putIfAbsent(cat, 0);
 			map.put(cat, (Integer) map.get(cat) + amount);
 		}
-		int[] arr1 = {475051, 1602661, 2616274, 3883077, 7113321};
-		int[] arr2 = {1318021, 2099722, 2560559, 3114833, 3985476};
+		int[] arr1 = { 475051, 1602661, 2616274, 3883077, 7113321 };
+		int[] arr2 = { 1318021, 2099722, 2560559, 3114833, 3985476 };
 		int j = 0;
 		Map<String, Object> standard = null;
-		for(int i = 1; i < arr1.length; i++) {
-			if(arr1[i] > incomeSum) {
-				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+1));
-				j = i - 1 ;
+		for (int i = 1; i < arr1.length; i++) {
+			if (arr1[i] > incomeSum) {
+				standard = (Map<String, Object>) rateDict.get(String.valueOf(i + 1));
+				j = i - 1;
 			} else if (i == 4) {
-				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+2));
+				standard = (Map<String, Object>) rateDict.get(String.valueOf(i + 2));
 				j = i;
 			}
 		}
-		
+
 		JSONObject object = new JSONObject();
 		ArrayList<Double> list = null;
-		for(Entry<String, Object> ent : map.entrySet()) {
+		for (Entry<String, Object> ent : map.entrySet()) {
 			list = new ArrayList<>();
 			double db = (double) ((Integer) ent.getValue()).intValue();
 			list.add(db / 3);
-			list.add((Double) standard.get(ent.getKey()) * incomeSum / arr1[j] * arr2[j]); 
+			list.add((Double) standard.get(ent.getKey()) * incomeSum / arr1[j] * arr2[j]);
 			object.put(ent.getKey(), list);
 		}
 		return object;
 	}
+
 	public JSONObject getCardDataCat(String userId) throws RestClientException, ParseException, IOException {
 		List<CardDataDTO> cardData = getCardData(userId);
 		JSONObject object = new JSONObject();
 		String cat = null;
-		for(CardDataDTO dto : cardData) {
-			cat = dto.getCat();
-			object.putIfAbsent(cat, new JSONArray());
-			((JSONArray) object.get(cat)).add(dto);
-		}
-		return object;
-	}	
-	public JSONObject getCardDataCatCouple(String userId1, String userId2) throws RestClientException, ParseException, IOException {
-		List<CardDataDTO> cardData = getCardDataCouple(userId1, userId2);
-		JSONObject object = new JSONObject();
-		String cat = null;
-		for(CardDataDTO dto : cardData) {
+		for (CardDataDTO dto : cardData) {
 			cat = dto.getCat();
 			object.putIfAbsent(cat, new JSONArray());
 			((JSONArray) object.get(cat)).add(dto);
 		}
 		return object;
 	}
-	
+
+	public JSONObject getCardDataCatCouple(String userId1, String userId2)
+			throws RestClientException, ParseException, IOException {
+		List<CardDataDTO> cardData = getCardDataCouple(userId1, userId2);
+		JSONObject object = new JSONObject();
+		String cat = null;
+		for (CardDataDTO dto : cardData) {
+			cat = dto.getCat();
+			object.putIfAbsent(cat, new JSONArray());
+			((JSONArray) object.get(cat)).add(dto);
+		}
+		return object;
+	}
+
 	public JSONArray getStockData(String userId) throws RestClientException, ParseException, IOException {
 		apiService.stockCntrList("account", "ordDate");
 		return searchTool.searchId("sample_stock_own", "userId", userId);
 	}
-	
-	public JSONArray getStockDataCouple(String userId1, String userId2) throws RestClientException, ParseException, IOException {
+
+	public JSONArray getStockDataCouple(String userId1, String userId2)
+			throws RestClientException, ParseException, IOException {
 		apiService.stockCntrList("account", "ordDate");
 		apiService.stockCntrList("account", "ordDate");
 		JSONArray result = new JSONArray();
 		result.addAll(searchTool.searchId("sample_stock_own", "userId", userId1));
 		result.addAll(searchTool.searchId("sample_stock_own", "userId", userId2));
+		return result;
+	}
+
+	public JSONArray getCardRcmd(String userId) throws RestClientException, ParseException, IOException {
+		List<CardDataDTO> cardData = getCardData(userId);
+		Map<String, Object> map = new HashMap<>();
+		String cat = null;
+		for (CardDataDTO dto : cardData) {
+			cat = dto.getCat();
+			int amount = dto.getApprvAmount();
+			map.putIfAbsent(cat, 0);
+			map.put(cat, (Integer) map.get(cat) + amount);
+		}
+		Map<String, String[]> dict = new HashMap<>();
+		dict.put("04", new String[] {"집 신용카드"});
+		dict.put("07", new String[] {"S20 체크(ㅂㅂㄱ 한정판)"});
+		dict.put("08", new String[] {"S20 체크(ㅂㅂㄱ 한정판)"});
+		dict.put("09", new String[] {"Deep Oil 신용카드", "YOLO Tasty(미니언즈) 신용카드"});
+		dict.put("01", new String[] {"Deep Store 신용카드", "YOLO Tasty(미니언즈) 신용카드"});
+		dict.put("11", new String[] {"Simple+ 신용카드", "YOLO Tasty(미니언즈) 신용카드"});
+		dict.put("02", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("03", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("05", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("06", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("10", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("12", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		HashSet<String> set = new HashSet<>();
+		List<String> list = map.entrySet().stream()
+		.sorted((v1, v2) -> (Integer) v2.getValue() - (Integer) v1.getValue()).limit(3)
+		.map(v -> v.getKey()).collect(Collectors.toList());
+		for(String key : list) {
+			for(String s : dict.get(key)) {
+				set.add(s);
+			}
+		}
+		JSONArray result = new JSONArray();
+		System.out.println(set);
+		set.stream().forEach(v -> result.add(v));
+		return result;
+	}
+	
+	public JSONArray getCardRcmdCouple(String userId1, String userId2) throws RestClientException, ParseException, IOException {
+		List<CardDataDTO> cardData = getCardDataCouple(userId1, userId2);
+		Map<String, Object> map = new HashMap<>();
+		String cat = null;
+		for (CardDataDTO dto : cardData) {
+			cat = dto.getCat();
+			int amount = dto.getApprvAmount();
+			map.putIfAbsent(cat, 0);
+			map.put(cat, (Integer) map.get(cat) + amount);
+		}
+		Map<String, String[]> dict = new HashMap<>();
+		dict.put("04", new String[] {"집 신용카드"});
+		dict.put("07", new String[] {"S20 체크(ㅂㅂㄱ 한정판)"});
+		dict.put("08", new String[] {"S20 체크(ㅂㅂㄱ 한정판)"});
+		dict.put("09", new String[] {"Deep Oil 신용카드", "YOLO Tasty(미니언즈) 신용카드"});
+		dict.put("01", new String[] {"Deep Store 신용카드", "YOLO Tasty(미니언즈) 신용카드"});
+		dict.put("11", new String[] {"Simple+ 신용카드", "YOLO Tasty(미니언즈) 신용카드"});
+		dict.put("02", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("03", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("05", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("06", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("10", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		dict.put("12", new String[] {"S-Line 체크(마이펫)", "Deep on 체크"});
+		HashSet<String> set = new HashSet<>();
+		List<String> list = map.entrySet().stream()
+				.sorted((v1, v2) -> (Integer) v2.getValue() - (Integer) v1.getValue()).limit(3)
+				.map(v -> v.getKey()).collect(Collectors.toList());
+		for(String key : list) {
+			for(String s : dict.get(key)) {
+				set.add(s);
+			}
+		}
+		JSONArray result = new JSONArray();
+		System.out.println(set);
+		set.stream().forEach(v -> result.add(v));
 		return result;
 	}
 }
