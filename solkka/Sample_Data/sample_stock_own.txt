@@ -1,0 +1,11 @@
+DELETE sample_stock_own
+
+POST sample_stock_own/_bulk
+{"index":{}}
+{"userId":"boy2019","accNo":"1234-5678","date":"20181231","port":[{"stkName":"삼성전자","ticker":"005930","amount":100},{"stkName":"오뚜기","ticker":"007310","amount":20},{"stkName":"한샘","ticker":"009240","amount":50},{"stkName":"SK이노베이션","ticker":"096770","amount":50},{"stkName":"이마트","ticker":"139480","amount":100}]}
+{"index":{}}
+{"userId":"boy2019","accNo":"1234-5678","date":"20181231","port":[{"stkName":"삼성전자","ticker":"005930","amount":250},{"stkName":"오뚜기","ticker":"007310","amount":25},{"stkName":"한샘","ticker":"009240","amount":70},{"stkName":"SK이노베이션","ticker":"096770","amount":25},{"stkName":"이마트","ticker":"139480","amount":120}]}
+{"index":{}}
+{"userId":"girl2019","accNo":"2222-4545","date":"20181231","port":[{"stkName":"큐브엔터","ticker":"182360","amount":400},{"stkName":"셀트리온","ticker":"068270","amount":40},{"stkName":"신라젠","ticker":"215600","amount":100}]}
+{"index":{}}
+{"userId":"girl2019","accNo":"2222-4545","date":"20191123","port":[{"stkName":"큐브엔터","ticker":"182360","amount":600},{"stkName":"셀트리온","ticker":"068270","amount":60},{"stkName":"신라젠","ticker":"215600","amount":110},{"stkName":"와이지엔터테인먼트","ticker":"122870","amount":100},{"stkName":"메지온","ticker":"140410","amount":15}]}

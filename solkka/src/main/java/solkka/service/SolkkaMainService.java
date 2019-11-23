@@ -302,5 +302,19 @@ public class SolkkaMainService {
 			((JSONArray) object.get(cat)).add(dto);
 		}
 		return object;
-	}	
+	}
+	
+	public JSONArray getStockData(String userId) throws RestClientException, ParseException, IOException {
+		apiService.stockCntrList("account", "ordDate");
+		return searchTool.searchId("sample_stock_own", "userId", userId);
+	}
+	
+	public JSONArray getStockDataCouple(String userId1, String userId2) throws RestClientException, ParseException, IOException {
+		apiService.stockCntrList("account", "ordDate");
+		apiService.stockCntrList("account", "ordDate");
+		JSONArray result = new JSONArray();
+		result.addAll(searchTool.searchId("sample_stock_own", "userId", userId1));
+		result.addAll(searchTool.searchId("sample_stock_own", "userId", userId2));
+		return result;
+	}
 }

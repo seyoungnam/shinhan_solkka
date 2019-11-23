@@ -3,6 +3,7 @@ package solkka.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class SolkkaMainController {
 	public JSONObject getExpenseRateCouple(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
 		return mainService.getExpanseRateCouple(body.get("userId1").toString(), body.get("userId2").toString(), (Integer) body.get("incomeSum"));
 	}
+	// 바디 : {"userId":"girl2019"}
 	@PostMapping("/getCardDataCat")
 	public JSONObject getCardDataCat(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
 		return mainService.getCardDataCat(body.get("userId").toString());
@@ -47,5 +49,15 @@ public class SolkkaMainController {
 	@PostMapping("/getCardDataCatCouple")
 	public JSONObject getCardDataCatCouple(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
 		return mainService.getCardDataCatCouple(body.get("userId1").toString(), body.get("userId2").toString());
+	}
+	// 바디 : {"userId":"girl2019"}
+	@PostMapping("/getStockData")
+	public JSONArray getStockData(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
+		return mainService.getStockData(body.get("userId").toString());
+	}
+	// 바디 : {"userId1":"girl2019", "userId2":"boy2019"}
+	@PostMapping("/getStockDataCouple")
+	public JSONArray getStockDataCouple(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
+		return mainService.getStockDataCouple(body.get("userId1").toString(), body.get("userId2").toString());
 	}
 }
