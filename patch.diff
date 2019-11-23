@@ -1,0 +1,184 @@
+From 2c535ad4d9ab04452e2e24e4488fcdba81b98bb9 Mon Sep 17 00:00:00 2001
+From: qus0in <qus0in@gmail.com>
+Date: Sat, 23 Nov 2019 22:07:37 +0900
+Subject: [PATCH] =?UTF-8?q?=EC=B2=B4=ED=81=AC=EC=B9=B4=EB=93=9C=20?=
+ =?UTF-8?q?=EB=8D=B0=EC=9D=B4=ED=84=B0=20=EC=97=85=EB=8D=B0=EC=9D=B4?=
+ =?UTF-8?q?=ED=84=B0=20+=20=EC=B9=B4=ED=85=8C=EA=B3=A0=EB=A6=AC=EB=B3=84?=
+ =?UTF-8?q?=20=EB=8D=B0=EC=9D=B4=ED=84=B0=20=EC=A0=9C=EA=B3=B5=20post?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ solkka/Sample_Data/sample_card_deposit.txt    | 78 ++++++++++++++++++-
+ .../controller/SolkkaMainController.java      |  9 +++
+ .../solkka/service/SolkkaMainService.java     | 27 ++++++-
+ 3 files changed, 111 insertions(+), 3 deletions(-)
+
+diff --git a/solkka/Sample_Data/sample_card_deposit.txt b/solkka/Sample_Data/sample_card_deposit.txt
+index 249a93e..d299535 100644
+--- a/solkka/Sample_Data/sample_card_deposit.txt
++++ b/solkka/Sample_Data/sample_card_deposit.txt
+@@ -103,4 +103,80 @@ POST sample_card_deposit/_bulk
+ {"index":{}}
+ {"userId":"girl2019","apprvId":18,"storeId":"040000","apprvDate":"20191007","apprvAmount":50000,"storeName":"한국수자원공사"}
+ {"index":{}}
+-{"userId":"girl2019","apprvId":19,"storeId":"060000","apprvDate":"20191009","apprvAmount":100000,"storeName":"수도한방병원"}
+\ No newline at end of file
++{"userId":"girl2019","apprvId":19,"storeId":"060000","apprvDate":"20191009","apprvAmount":100000,"storeName":"수도한방병원"}
++{"index":{}}
++{"userId":"boy2019","apprvId":1,"storeId":"010000","apprvDate":"20190817","apprvAmount":200000,"storeName":"롯데마트"}
++{"index":{}}
++{"userId":"boy2019","apprvId":2,"storeId":"020000","apprvDate":"20190818","apprvAmount":20000,"storeName":"맥주공장"}
++{"index":{}}
++{"userId":"boy2019","apprvId":3,"storeId":"030000","apprvDate":"20190819","apprvAmount":400000,"storeName":"나이키"}
++{"index":{}}
++{"userId":"boy2019","apprvId":4,"storeId":"040000","apprvDate":"20190820","apprvAmount":30000,"storeName":"한국수자원공사"}
++{"index":{}}
++{"userId":"boy2019","apprvId":5,"storeId":"050000","apprvDate":"20190821","apprvAmount":30000,"storeName":"집닥"}
++{"index":{}}
++{"userId":"boy2019","apprvId":6,"storeId":"060000","apprvDate":"20190822","apprvAmount":50000,"storeName":"서울한방병원"}
++{"index":{}}
++{"userId":"boy2019","apprvId":7,"storeId":"070000","apprvDate":"20190823","apprvAmount":50000,"storeName":"코레일"}
++{"index":{}}
++{"userId":"boy2019","apprvId":8,"storeId":"080000","apprvDate":"20190824","apprvAmount":16000,"storeName":"AWS"}
++{"index":{}}
++{"userId":"boy2019","apprvId":9,"storeId":"090000","apprvDate":"20190825","apprvAmount":20000,"storeName":"롯데시네마"}
++{"index":{}}
++{"userId":"boy2019","apprvId":10,"storeId":"070000","apprvDate":"20190916","apprvAmount":110000,"storeName":"경기버스"}
++{"index":{}}
++{"userId":"boy2019","apprvId":11,"storeId":"080000","apprvDate":"20190916","apprvAmount":40000,"storeName":"KT TV"}
++{"index":{}}
++{"userId":"boy2019","apprvId":12,"storeId":"090000","apprvDate":"20190916","apprvAmount":20000,"storeName":"CGV"}
++{"index":{}}
++{"userId":"boy2019","apprvId":13,"storeId":"100000","apprvDate":"20190916","apprvAmount":200000,"storeName":"스터디챔프"}
++{"index":{}}
++{"userId":"boy2019","apprvId":14,"storeId":"120000","apprvDate":"20190916","apprvAmount":200000,"storeName":"ETS"}
++{"index":{}}
++{"userId":"boy2019","apprvId":15,"storeId":"010000","apprvDate":"20191004","apprvAmount":500000,"storeName":"롯데마트"}
++{"index":{}}
++{"userId":"boy2019","apprvId":16,"storeId":"020000","apprvDate":"20191005","apprvAmount":100000,"storeName":"코트룸"}
++{"index":{}}
++{"userId":"boy2019","apprvId":17,"storeId":"030000","apprvDate":"20191006","apprvAmount":300000,"storeName":"Club Monaco"}
++{"index":{}}
++{"userId":"boy2019","apprvId":18,"storeId":"040000","apprvDate":"20191007","apprvAmount":10000,"storeName":"한국수자원공사"}
++{"index":{}}
++{"userId":"boy2019","apprvId":19,"storeId":"060000","apprvDate":"20191009","apprvAmount":20000,"storeName":"수도한방병원"}
++{"index":{}}
++{"userId":"girl2019","apprvId":1,"storeId":"010000","apprvDate":"20190817","apprvAmount":350000,"storeName":"롯데마트"}
++{"index":{}}
++{"userId":"girl2019","apprvId":2,"storeId":"020000","apprvDate":"20190818","apprvAmount":40000,"storeName":"맥주공장"}
++{"index":{}}
++{"userId":"girl2019","apprvId":3,"storeId":"030000","apprvDate":"20190819","apprvAmount":250000,"storeName":"나이키"}
++{"index":{}}
++{"userId":"girl2019","apprvId":4,"storeId":"040000","apprvDate":"20190820","apprvAmount":20000,"storeName":"한국수자원공사"}
++{"index":{}}
++{"userId":"girl2019","apprvId":5,"storeId":"050000","apprvDate":"20190821","apprvAmount":50000,"storeName":"집닥"}
++{"index":{}}
++{"userId":"girl2019","apprvId":6,"storeId":"060000","apprvDate":"20190822","apprvAmount":10000,"storeName":"서울한방병원"}
++{"index":{}}
++{"userId":"girl2019","apprvId":7,"storeId":"070000","apprvDate":"20190823","apprvAmount":100000,"storeName":"코레일"}
++{"index":{}}
++{"userId":"girl2019","apprvId":8,"storeId":"080000","apprvDate":"20190824","apprvAmount":100000,"storeName":"AWS"}
++{"index":{}}
++{"userId":"girl2019","apprvId":9,"storeId":"090000","apprvDate":"20190825","apprvAmount":50000,"storeName":"롯데시네마"}
++{"index":{}}
++{"userId":"girl2019","apprvId":10,"storeId":"070000","apprvDate":"20190916","apprvAmount":130000,"storeName":"경기버스"}
++{"index":{}}
++{"userId":"girl2019","apprvId":11,"storeId":"080000","apprvDate":"20190916","apprvAmount":90000,"storeName":"KT TV"}
++{"index":{}}
++{"userId":"girl2019","apprvId":12,"storeId":"090000","apprvDate":"20190916","apprvAmount":40000,"storeName":"CGV"}
++{"index":{}}
++{"userId":"girl2019","apprvId":13,"storeId":"100000","apprvDate":"20190916","apprvAmount":80000,"storeName":"스터디챔프"}
++{"index":{}}
++{"userId":"girl2019","apprvId":14,"storeId":"120000","apprvDate":"20190916","apprvAmount":200000,"storeName":"ETS"}
++{"index":{}}
++{"userId":"girl2019","apprvId":15,"storeId":"010000","apprvDate":"20191004","apprvAmount":450000,"storeName":"롯데마트"}
++{"index":{}}
++{"userId":"girl2019","apprvId":16,"storeId":"020000","apprvDate":"20191005","apprvAmount":60000,"storeName":"코트룸"}
++{"index":{}}
++{"userId":"girl2019","apprvId":17,"storeId":"030000","apprvDate":"20191006","apprvAmount":260000,"storeName":"Club Monaco"}
++{"index":{}}
++{"userId":"girl2019","apprvId":18,"storeId":"040000","apprvDate":"20191007","apprvAmount":40000,"storeName":"한국수자원공사"}
++{"index":{}}
++{"userId":"girl2019","apprvId":19,"storeId":"060000","apprvDate":"20191009","apprvAmount":90000,"storeName":"수도한방병원"}
+\ No newline at end of file
+diff --git a/solkka/src/main/java/solkka/controller/SolkkaMainController.java b/solkka/src/main/java/solkka/controller/SolkkaMainController.java
+index cb8b29f..21b8c8f 100644
+--- a/solkka/src/main/java/solkka/controller/SolkkaMainController.java
++++ b/solkka/src/main/java/solkka/controller/SolkkaMainController.java
+@@ -39,4 +39,13 @@ public class SolkkaMainController {
+ 	public JSONObject getExpenseRateCouple(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
+ 		return mainService.getExpanseRateCouple(body.get("userId1").toString(), body.get("userId2").toString(), (Integer) body.get("incomeSum"));
+ 	}
++	@PostMapping("/getCardDataCat")
++	public JSONObject getCardDataCat(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
++		return mainService.getCardDataCat(body.get("userId").toString());
++	}
++	// 바디 : {"userId1":"girl2019", "userId2":"boy2019"}
++	@PostMapping("/getCardDataCatCouple")
++	public JSONObject getCardDataCatCouple(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
++		return mainService.getCardDataCatCouple(body.get("userId1").toString(), body.get("userId2").toString());
++	}
+ }
+diff --git a/solkka/src/main/java/solkka/service/SolkkaMainService.java b/solkka/src/main/java/solkka/service/SolkkaMainService.java
+index 1f18946..219baf3 100644
+--- a/solkka/src/main/java/solkka/service/SolkkaMainService.java
++++ b/solkka/src/main/java/solkka/service/SolkkaMainService.java
+@@ -10,6 +10,7 @@ import java.util.List;
+ import java.util.Map;
+ import java.util.Map.Entry;
+ 
++import org.json.simple.JSONArray;
+ import org.json.simple.JSONObject;
+ import org.json.simple.parser.ParseException;
+ import org.springframework.beans.factory.annotation.Autowired;
+@@ -145,7 +146,7 @@ public class SolkkaMainService {
+ 			cat = dto.getCat();
+ 			int amount = dto.getApprvAmount();
+ 			map.putIfAbsent(cat, 0);
+-			map.put(dto.getCat(), (Integer) map.get(cat) + amount);
++			map.put(cat, (Integer) map.get(cat) + amount);
+ 		}
+ 		int[] arr1 = {475051, 1602661, 2616274, 3883077, 7113321};
+ 		int[] arr2 = {1318021, 2099722, 2560559, 3114833, 3985476};
+@@ -253,7 +254,7 @@ public class SolkkaMainService {
+ 			cat = dto.getCat();
+ 			int amount = dto.getApprvAmount();
+ 			map.putIfAbsent(cat, 0);
+-			map.put(dto.getCat(), (Integer) map.get(cat) + amount);
++			map.put(cat, (Integer) map.get(cat) + amount);
+ 		}
+ 		int[] arr1 = {475051, 1602661, 2616274, 3883077, 7113321};
+ 		int[] arr2 = {1318021, 2099722, 2560559, 3114833, 3985476};
+@@ -280,4 +281,26 @@ public class SolkkaMainService {
+ 		}
+ 		return object;
+ 	}
++	public JSONObject getCardDataCat(String userId) throws RestClientException, ParseException, IOException {
++		List<CardDataDTO> cardData = getCardData(userId);
++		JSONObject object = new JSONObject();
++		String cat = null;
++		for(CardDataDTO dto : cardData) {
++			cat = dto.getCat();
++			object.putIfAbsent(cat, new JSONArray());
++			((JSONArray) object.get(cat)).add(dto);
++		}
++		return object;
++	}	
++	public JSONObject getCardDataCatCouple(String userId1, String userId2) throws RestClientException, ParseException, IOException {
++		List<CardDataDTO> cardData = getCardDataCouple(userId1, userId2);
++		JSONObject object = new JSONObject();
++		String cat = null;
++		for(CardDataDTO dto : cardData) {
++			cat = dto.getCat();
++			object.putIfAbsent(cat, new JSONArray());
++			((JSONArray) object.get(cat)).add(dto);
++		}
++		return object;
++	}	
+ }
+\ No newline at end of file
+-- 
+2.22.0.windows.1
+
