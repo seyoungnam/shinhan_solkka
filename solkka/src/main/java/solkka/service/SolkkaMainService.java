@@ -5,8 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +65,221 @@ public class SolkkaMainService {
 		// 최근 순으로 정렬한다
 		result.sort((v1, v2) -> Integer.parseInt(v2.getApprvDate()) - Integer.parseInt(v1.getApprvDate()));
 		return result;
+	}
+	
+	public JSONObject getExpanseRate(String userId, int income) throws RestClientException, ParseException, IOException {
+		Map<String, Object> one = new HashMap<>();
+		one.put("01", 0.164);
+		one.put("02", 0.014);
+		one.put("03", 0.045);
+		one.put("04", 0.175);
+		one.put("05", 0.034);
+		one.put("06", 0.079);
+		one.put("07", 0.076);
+		one.put("08", 0.046);
+		one.put("09", 0.047);
+		one.put("10", 0.034);
+		one.put("11", 0.097);
+		one.put("12", 0.056);
+		Map<String, Object> two = new HashMap<>();
+		two.put("01", 0.137);
+		two.put("02", 0.013);
+		two.put("03", 0.045);
+		two.put("04", 0.111);
+		two.put("05", 0.034);
+		two.put("06", 0.074);
+		two.put("07", 0.090);
+		two.put("08", 0.052);
+		two.put("09", 0.050);
+		two.put("10", 0.051);
+		two.put("11", 0.111);
+		two.put("12", 0.058);
+		Map<String, Object> three = new HashMap<>();
+		three.put("01", 0.112);
+		three.put("02", 0.012);
+		three.put("03", 0.047);
+		three.put("04", 0.092);
+		three.put("05", 0.035);
+		three.put("06", 0.059);
+		three.put("07", 0.102);
+		three.put("08", 0.047);
+		three.put("09", 0.055);
+		three.put("10", 0.055);
+		three.put("11", 0.115);
+		three.put("12", 0.061);
+		Map<String, Object> four = new HashMap<>();
+		four.put("01", 0.099);
+		four.put("02", 0.011);
+		four.put("03", 0.047);
+		four.put("04", 0.074);
+		four.put("05", 0.035);
+		four.put("06", 0.054);
+		four.put("07", 0.108);
+		four.put("08", 0.039);
+		four.put("09", 0.061);
+		four.put("10", 0.062);
+		four.put("11", 0.113);
+		four.put("12", 0.057);
+		Map<String, Object> five = new HashMap<>();
+		five.put("01", 0.080);
+		five.put("02", 0.006);
+		five.put("03", 0.047);
+		five.put("04", 0.058);
+		five.put("05", 0.036);
+		five.put("06", 0.041);
+		five.put("07", 0.107);
+		five.put("08", 0.031);
+		five.put("09", 0.068);
+		five.put("10", 0.058);
+		five.put("11", 0.099);
+		five.put("12", 0.056);
+		Map<String, Object> rateDict = new HashMap<>();
+		rateDict.put("1", one);
+		rateDict.put("2", two);
+		rateDict.put("3", three);
+		rateDict.put("4", four);
+		rateDict.put("5", five);
+		
+		List<CardDataDTO> cardData = getCardData(userId);
+		int totalSum = 0;
+		Map<String, Object> map = new HashMap<>();
+		String cat = null;
+		for(CardDataDTO dto : cardData) {
+			cat = dto.getCat();
+			int amount = dto.getApprvAmount();
+			totalSum += amount;
+			map.putIfAbsent(cat, 0);
+			map.put(dto.getCat(), (Integer) map.get(cat) + amount);
+		}
+		int[] arr = {1602661, 2616274, 3883077, 7113321};
+		Map<String, Object> standard = null;
+		for(int i = 0; i < arr.length; i++) {
+			if(arr[i] > income) {
+				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+1));
+			} else if (i == 3) {
+				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+2));
+			}
+		}
+		
+		JSONObject object = new JSONObject();
+		ArrayList<Double> list = null;
+		for(Entry<String, Object> ent : map.entrySet()) {
+			list = new ArrayList<>();
+			double db = (double) ((Integer) ent.getValue()).intValue();
+			list.add(db / 3);
+			list.add(db / income / 3);
+			list.add((Double) standard.get(ent.getKey())); 
+			list.add((Double) standard.get(ent.getKey()) * income); 
+			object.put(ent.getKey(), list);
+		}
+		return object;
+	}
+	
+	public JSONObject getExpanseRateCouple(String userId1, String userId2, int incomeSum) throws RestClientException, ParseException, IOException {
+		Map<String, Object> one = new HashMap<>();
+		one.put("01", 0.164);
+		one.put("02", 0.014);
+		one.put("03", 0.045);
+		one.put("04", 0.175);
+		one.put("05", 0.034);
+		one.put("06", 0.079);
+		one.put("07", 0.076);
+		one.put("08", 0.046);
+		one.put("09", 0.047);
+		one.put("10", 0.034);
+		one.put("11", 0.097);
+		one.put("12", 0.056);
+		Map<String, Object> two = new HashMap<>();
+		two.put("01", 0.137);
+		two.put("02", 0.013);
+		two.put("03", 0.045);
+		two.put("04", 0.111);
+		two.put("05", 0.034);
+		two.put("06", 0.074);
+		two.put("07", 0.090);
+		two.put("08", 0.052);
+		two.put("09", 0.050);
+		two.put("10", 0.051);
+		two.put("11", 0.111);
+		two.put("12", 0.058);
+		Map<String, Object> three = new HashMap<>();
+		three.put("01", 0.112);
+		three.put("02", 0.012);
+		three.put("03", 0.047);
+		three.put("04", 0.092);
+		three.put("05", 0.035);
+		three.put("06", 0.059);
+		three.put("07", 0.102);
+		three.put("08", 0.047);
+		three.put("09", 0.055);
+		three.put("10", 0.055);
+		three.put("11", 0.115);
+		three.put("12", 0.061);
+		Map<String, Object> four = new HashMap<>();
+		four.put("01", 0.099);
+		four.put("02", 0.011);
+		four.put("03", 0.047);
+		four.put("04", 0.074);
+		four.put("05", 0.035);
+		four.put("06", 0.054);
+		four.put("07", 0.108);
+		four.put("08", 0.039);
+		four.put("09", 0.061);
+		four.put("10", 0.062);
+		four.put("11", 0.113);
+		four.put("12", 0.057);
+		Map<String, Object> five = new HashMap<>();
+		five.put("01", 0.080);
+		five.put("02", 0.006);
+		five.put("03", 0.047);
+		five.put("04", 0.058);
+		five.put("05", 0.036);
+		five.put("06", 0.041);
+		five.put("07", 0.107);
+		five.put("08", 0.031);
+		five.put("09", 0.068);
+		five.put("10", 0.058);
+		five.put("11", 0.099);
+		five.put("12", 0.056);
+		Map<String, Object> rateDict = new HashMap<>();
+		rateDict.put("1", one);
+		rateDict.put("2", two);
+		rateDict.put("3", three);
+		rateDict.put("4", four);
+		rateDict.put("5", five);
+		
+		List<CardDataDTO> cardData = getCardDataCouple(userId1, userId2);
+		int totalSum = 0;
+		Map<String, Object> map = new HashMap<>();
+		String cat = null;
+		for(CardDataDTO dto : cardData) {
+			cat = dto.getCat();
+			int amount = dto.getApprvAmount();
+			totalSum += amount;
+			map.putIfAbsent(cat, 0);
+			map.put(dto.getCat(), (Integer) map.get(cat) + amount);
+		}
+		int[] arr = {1602661, 2616274, 3883077, 7113321};
+		Map<String, Object> standard = null;
+		for(int i = 0; i < arr.length; i++) {
+			if(arr[i] > incomeSum) {
+				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+1));
+			} else if (i == 3) {
+				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+2));
+			}
+		}
+		
+		JSONObject object = new JSONObject();
+		ArrayList<Double> list = null;
+		for(Entry<String, Object> ent : map.entrySet()) {
+			list = new ArrayList<>();
+			double db = (double) ((Integer) ent.getValue()).intValue();
+			list.add(db / 3);
+			list.add(db / incomeSum / 3);
+			list.add((Double) standard.get(ent.getKey())); 
+			list.add((Double) standard.get(ent.getKey()) * incomeSum); 
+			object.put(ent.getKey(), list);
+		}
+		return object;
 	}
 }
