@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -141,23 +139,25 @@ public class SolkkaMainService {
 		rateDict.put("5", five);
 		
 		List<CardDataDTO> cardData = getCardData(userId);
-		int totalSum = 0;
 		Map<String, Object> map = new HashMap<>();
 		String cat = null;
 		for(CardDataDTO dto : cardData) {
 			cat = dto.getCat();
 			int amount = dto.getApprvAmount();
-			totalSum += amount;
 			map.putIfAbsent(cat, 0);
 			map.put(dto.getCat(), (Integer) map.get(cat) + amount);
 		}
-		int[] arr = {1602661, 2616274, 3883077, 7113321};
+		int[] arr1 = {475051, 1602661, 2616274, 3883077, 7113321};
+		int[] arr2 = {1318021, 2099722, 2560559, 3114833, 3985476};
+		int j = 0;
 		Map<String, Object> standard = null;
-		for(int i = 0; i < arr.length; i++) {
-			if(arr[i] > income) {
+		for(int i = 1; i < arr1.length; i++) {
+			if(arr1[i] > income) {
 				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+1));
-			} else if (i == 3) {
+				j = i - 1 ;
+			} else if (i == 4) {
 				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+2));
+				j = i;
 			}
 		}
 		
@@ -167,9 +167,7 @@ public class SolkkaMainService {
 			list = new ArrayList<>();
 			double db = (double) ((Integer) ent.getValue()).intValue();
 			list.add(db / 3);
-			list.add(db / income / 3);
-			list.add((Double) standard.get(ent.getKey())); 
-			list.add((Double) standard.get(ent.getKey()) * income); 
+			list.add((Double) standard.get(ent.getKey()) * income / arr1[j] * arr2[j]); 
 			object.put(ent.getKey(), list);
 		}
 		return object;
@@ -249,23 +247,25 @@ public class SolkkaMainService {
 		rateDict.put("5", five);
 		
 		List<CardDataDTO> cardData = getCardDataCouple(userId1, userId2);
-		int totalSum = 0;
 		Map<String, Object> map = new HashMap<>();
 		String cat = null;
 		for(CardDataDTO dto : cardData) {
 			cat = dto.getCat();
 			int amount = dto.getApprvAmount();
-			totalSum += amount;
 			map.putIfAbsent(cat, 0);
 			map.put(dto.getCat(), (Integer) map.get(cat) + amount);
 		}
-		int[] arr = {1602661, 2616274, 3883077, 7113321};
+		int[] arr1 = {475051, 1602661, 2616274, 3883077, 7113321};
+		int[] arr2 = {1318021, 2099722, 2560559, 3114833, 3985476};
+		int j = 0;
 		Map<String, Object> standard = null;
-		for(int i = 0; i < arr.length; i++) {
-			if(arr[i] > incomeSum) {
+		for(int i = 1; i < arr1.length; i++) {
+			if(arr1[i] > incomeSum) {
 				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+1));
-			} else if (i == 3) {
+				j = i - 1 ;
+			} else if (i == 4) {
 				standard = (Map<String, Object>) rateDict.get(String.valueOf(i+2));
+				j = i;
 			}
 		}
 		
@@ -275,9 +275,7 @@ public class SolkkaMainService {
 			list = new ArrayList<>();
 			double db = (double) ((Integer) ent.getValue()).intValue();
 			list.add(db / 3);
-			list.add(db / incomeSum / 3);
-			list.add((Double) standard.get(ent.getKey())); 
-			list.add((Double) standard.get(ent.getKey()) * incomeSum); 
+			list.add((Double) standard.get(ent.getKey()) * incomeSum / arr1[j] * arr2[j]); 
 			object.put(ent.getKey(), list);
 		}
 		return object;
