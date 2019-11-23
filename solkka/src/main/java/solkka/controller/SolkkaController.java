@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SolkkaController {
 	@RequestMapping("/main")
-	public String login(@RequestParam(value="id") String id, @RequestParam(value="password") String pw) {
+	public String login() {
 		return "main";
 	}
 	

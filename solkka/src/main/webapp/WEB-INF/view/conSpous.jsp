@@ -45,7 +45,106 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
 
+google.charts.load("current", {packages:['corechart']});
+							  function getGraph(){
+								  let data = '{"userId":"girl2019", "income":"5000000"}'
+								  let fistData = 0
+								  let second = 0
+								  axios.post("http://localhost:8000/getExpenseRate",JSON.parse(data)).then(resData => {
+									   fistData = resData.data["01"][0] +
+											  resData.data["02"][0] +
+											  resData.data["03"][0] +
+											  resData.data["04"][0] +
+											  resData.data["05"][0] +
+											  resData.data["06"][0] +
+											  resData.data["07"][0] +
+											  resData.data["08"][0] +
+											  resData.data["09"][0] +
+											  resData.data["10"][0] +
+											  resData.data["11"][0] +
+											  resData.data["12"][0];
+											  
+										second = resData.data["01"][1] +
+											  resData.data["02"][1] +
+											  resData.data["03"][1] +
+											  resData.data["04"][1] +
+											  resData.data["05"][1] +
+											  resData.data["06"][1] +
+											  resData.data["07"][1] +
+											  resData.data["08"][1] +
+											  resData.data["09"][1] +
+											  resData.data["10"][1] +
+											  resData.data["11"][1] +
+											  resData.data["12"][1];
+										 google.charts.setOnLoadCallback(drawChart(fistData, second));
+								  })
+							  
+							    
+							   
+
+							  }
+							  
+							    function drawChart(fistData, second) {
+								      var value = google.visualization.arrayToDataTable([
+								        ["Element", "원", { role: "style" } ],
+								        ["배우자 지출", Math.ceil(fistData), "#b87333"],
+								        ["평균 지출", Math.ceil(second), "gold"]
+								      ]);
+								
+								      var view = new google.visualization.DataView(value);
+								      view.setColumns([0, 1,
+								                       { calc: "stringify",
+								                         sourceColumn: 1,
+								                         type: "string",
+								                         role: "annotation" },
+								                       2]);
+								
+								      var options = {
+								        title: "-배우자와 소득이 비슷한 사람들은 이만큼 써요-",
+								        width: 500,
+								        height: 600,
+								        bar: {groupWidth: "95%"},
+								        legend: { position: "none" },
+								        vAxis : {minValue:0}
+								      };
+								      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+								      chart.draw(view, options);
+								      google.charts.load('current', {'packages':['table']});
+								  	}
+							    
+							    
+							  
+							function getTable(){
+							let data2 = '{"userId":"girl2019"}'
+							let date = []
+							axios.post("http://localhost:8000/getCardData",JSON.parse(data2)).then(resData => {
+								resData.data.forEach(function(element){
+								    date.push(Array(element["apprvDate"], element["cardType"], element["cat"], element["apprvAmount"]))
+	
+								});
+						      google.charts.setOnLoadCallback(drawTable(date));
+								
+							});
+
+
+						      function drawTable(date) {
+						        var data = new google.visualization.DataTable();
+						        data.addColumn('string', 'date');
+						        data.addColumn('string', 'cardType');
+						        data.addColumn('string', 'cat');
+						        data.addColumn('number', 'amount');
+						        data.addRows(date);
+
+						        var table = new google.visualization.Table(document.getElementById('columnchart_values'));
+
+						        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+						      }
+							}
+</script>
 </head>
 <body data-spy="scroll" data-target=".header" data-offset="50">
 	<!-- Page loader -->
@@ -104,79 +203,11 @@
 						<hr>
 						<br>
 						<p>배우자의 소득 평균 소비</p>
-						<script type="text/javascript"
-							src="https://www.gstatic.com/charts/loader.js"></script>
-						<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-						<script type="text/javascript">
-							  var data = '{"userId":"girl2019", "income":"5000000"}'
-							  var fistData = 0
-							  var second = 0
-							  axios.post("http://localhost:8000/getExpenseRate",JSON.parse(data)).then(resData => {
-								   fistData = resData.data["01"][0] +
-										  resData.data["02"][0] +
-										  resData.data["03"][0] +
-										  resData.data["04"][0] +
-										  resData.data["05"][0] +
-										  resData.data["06"][0] +
-										  resData.data["07"][0] +
-										  resData.data["08"][0] +
-										  resData.data["09"][0] +
-										  resData.data["10"][0] +
-										  resData.data["11"][0] +
-										  resData.data["12"][0];
-										  
-									second = resData.data["01"][1] +
-										  resData.data["02"][1] +
-										  resData.data["03"][1] +
-										  resData.data["04"][1] +
-										  resData.data["05"][1] +
-										  resData.data["06"][1] +
-										  resData.data["07"][1] +
-										  resData.data["08"][1] +
-										  resData.data["09"][1] +
-										  resData.data["10"][1] +
-										  resData.data["11"][1] +
-										  resData.data["12"][1];
-							  })
-							    google.charts.load("current", {packages:['corechart']});
-							    google.charts.setOnLoadCallback(drawChart);
-							    function drawChart() {
-							      var data = google.visualization.arrayToDataTable([
-							        ["Element", "원", { role: "style" } ],
-							        ["배우자 지출", Math.ceil(fistData), "#b87333"],
-							        ["평균 지출", Math.ceil(second), "gold"]
-							      ]);
-							
-							      var view = new google.visualization.DataView(data);
-							      view.setColumns([0, 1,
-							                       { calc: "stringify",
-							                         sourceColumn: 1,
-							                         type: "string",
-							                         role: "annotation" },
-							                       2]);
-							
-							      var options = {
-							        title: "-배우자와 소득이 비슷한 사람들은 이만큼 써요-",
-							        width: 600,
-							        height: 400,
-							        bar: {groupWidth: "95%"},
-							        legend: { position: "none" },
-							        vAxis : {minValue:0}
-							      };
-							      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-							      chart.draw(view, options);
-							  }
-			
-  						</script>
+						<button onclick="getGraph()" class="appao-btn appao-btn2">배우자의
+							소비 패턴 그래프 보기</button>
+						<button onclick="getTable()" class="appao-btn appao-btn2">배우자의
+							소비 내역 보기</button>
 						<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
-						<div id="table_div"></div>
-
-						<div class="post-author">
-							<a href="#"><i class="icofont icofont-user"></i>John</a> <a
-								href="#"><i class="icofont icofont-speech-comments"></i>Comments</a>
-							<a href="#"><i class="icofont icofont-calendar"></i>21 Feb
-								2018</a>
-						</div>
 					</div>
 				</div>
 			</div>

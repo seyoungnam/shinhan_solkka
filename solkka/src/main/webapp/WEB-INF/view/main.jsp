@@ -81,7 +81,8 @@
 								 부부 사이에도 투명한 자산관리를 위하여! <br> 
 							 	독박 자산관리는 이제 그만!
 							</p>
-							<a href="#" class="appao-btn">소비 패턴 분석 바로가기</a>
+							<a href="#a" class="appao-btn">소비 패턴 분석 바로가기</a>
+							<a href="#b" class="appao-btn">주식 궁합 분석 바록가기</a>
 							<!-- <a href="#" class="appao-btn">App Store</a> -->
 						</div>
 					</div>
@@ -106,7 +107,7 @@
 				</div>
 				<div class="row flexbox-center">
 					<div class="col-lg-6">
-						<div class="single-showcase-box">
+						<div class="single-showcase-box" id="a">
 							<h4>소비 패턴 궁합 보기</h4>
 							<p>본인과 배우자의 소비 패턴, 그리고 둘의 소비 패턴을 합쳤을 때의 궁합 볼 수 있습니다. </p>
 							<a href="/asset" class="appao-btn appao-btn2">Read More</a>
@@ -125,7 +126,7 @@
 						</div>
 					</div>
 					<div class="col-lg-6">
-						<div class="single-showcase-box">
+						<div class="single-showcase-box" id="b">
 							<h4>투자 궁합 보기</h4>
 							<p>본인과 배우자의 투자 성향을 분석하여 최적의 궁합을 보여드립니다. </p>
 							<a href="#" class="appao-btn appao-btn2">Read More</a>
