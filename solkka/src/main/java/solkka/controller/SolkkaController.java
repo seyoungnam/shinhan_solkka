@@ -8,7 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SolkkaController {
 	@RequestMapping("/main")
 	public String login(@RequestParam(value="id") String id, @RequestParam(value="password") String pw) {
-		System.out.println(id+pw);
+		System.out.println("2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+id+pw);
 		return "main";
+	}
+	
+	@RequestMapping("/asset")
+	public String asset() {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@");
+		return "asset";
 	}
 }
