@@ -35,6 +35,7 @@ public class SolkkaMainService {
 		System.out.println(apiService.usedCredit(before + today));;
 		// 대신 Sample Data를 호출한다
 		List<CardDataDTO> result = searchTool.searchIdAndDate("sample_card_credit", "userId", userId, "apprvDate", before);
+		result.addAll(searchTool.searchIdAndDate("sample_card_deposit", "userId", userId, "apprvDate", before));
 		// 최근 순으로 정렬한다
 		result.sort((v1, v2) -> Integer.parseInt(v2.getApprvDate()) - Integer.parseInt(v1.getApprvDate()));
 		return result;
@@ -48,6 +49,8 @@ public class SolkkaMainService {
 		// 대신 Sample Data를 호출한다
 		List<CardDataDTO> result = searchTool.searchIdAndDate("sample_card_credit", "userId", userId1, "apprvDate", before);
 		result.addAll(searchTool.searchIdAndDate("sample_card_credit", "userId", userId2, "apprvDate", before));
+		result.addAll(searchTool.searchIdAndDate("sample_card_deposit", "userId", userId1, "apprvDate", before));
+		result.addAll(searchTool.searchIdAndDate("sample_card_deposit", "userId", userId2, "apprvDate", before));
 		// 최근 순으로 정렬한다
 		result.sort((v1, v2) -> Integer.parseInt(v2.getApprvDate()) - Integer.parseInt(v1.getApprvDate()));
 		return result;

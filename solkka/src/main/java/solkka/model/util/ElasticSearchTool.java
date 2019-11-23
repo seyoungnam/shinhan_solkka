@@ -38,6 +38,7 @@ public class ElasticSearchTool {
 
 	public List<CardDataDTO> searchIdAndDate(String index, String idField, String userId, String dateField, String before) throws IOException {
 		connect();
+		System.out.println(index);
 		SearchRequest searchRequest = new SearchRequest(index);
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.query(QueryBuilders.boolQuery()
@@ -51,7 +52,7 @@ public class ElasticSearchTool {
 		for(SearchHit hit : searchResponse.getHits().getHits()) {
 			map = hit.getSourceAsMap();
 			result.add(new CardDataDTO(map.get("userId").toString()
-					, "신용", map.get("apprvDate").toString()
+					, index.equals("sample_card_credit") ? "신용" : "체크", map.get("apprvDate").toString()
 					, map.get("storeId").toString().substring(0, 2)
 					, Integer.parseInt(map.get("apprvAmount").toString())
 					, map.get("storeName").toString()));
