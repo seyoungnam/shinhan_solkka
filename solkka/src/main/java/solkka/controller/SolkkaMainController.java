@@ -39,4 +39,13 @@ public class SolkkaMainController {
 	public JSONObject getExpenseRateCouple(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
 		return mainService.getExpanseRateCouple(body.get("userId1").toString(), body.get("userId2").toString(), (Integer) body.get("incomeSum"));
 	}
+	@PostMapping("/getCardDataCat")
+	public JSONObject getCardDataCat(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
+		return mainService.getCardDataCat(body.get("userId").toString());
+	}
+	// 바디 : {"userId1":"girl2019", "userId2":"boy2019"}
+	@PostMapping("/getCardDataCatCouple")
+	public JSONObject getCardDataCatCouple(@RequestBody JSONObject body) throws RestClientException, ParseException, IOException {
+		return mainService.getCardDataCatCouple(body.get("userId1").toString(), body.get("userId2").toString());
+	}
 }

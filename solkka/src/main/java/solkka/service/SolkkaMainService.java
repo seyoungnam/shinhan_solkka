@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,7 +146,7 @@ public class SolkkaMainService {
 			cat = dto.getCat();
 			int amount = dto.getApprvAmount();
 			map.putIfAbsent(cat, 0);
-			map.put(dto.getCat(), (Integer) map.get(cat) + amount);
+			map.put(cat, (Integer) map.get(cat) + amount);
 		}
 		int[] arr1 = {475051, 1602661, 2616274, 3883077, 7113321};
 		int[] arr2 = {1318021, 2099722, 2560559, 3114833, 3985476};
@@ -253,7 +254,7 @@ public class SolkkaMainService {
 			cat = dto.getCat();
 			int amount = dto.getApprvAmount();
 			map.putIfAbsent(cat, 0);
-			map.put(dto.getCat(), (Integer) map.get(cat) + amount);
+			map.put(cat, (Integer) map.get(cat) + amount);
 		}
 		int[] arr1 = {475051, 1602661, 2616274, 3883077, 7113321};
 		int[] arr2 = {1318021, 2099722, 2560559, 3114833, 3985476};
@@ -280,4 +281,26 @@ public class SolkkaMainService {
 		}
 		return object;
 	}
+	public JSONObject getCardDataCat(String userId) throws RestClientException, ParseException, IOException {
+		List<CardDataDTO> cardData = getCardData(userId);
+		JSONObject object = new JSONObject();
+		String cat = null;
+		for(CardDataDTO dto : cardData) {
+			cat = dto.getCat();
+			object.putIfAbsent(cat, new JSONArray());
+			((JSONArray) object.get(cat)).add(dto);
+		}
+		return object;
+	}	
+	public JSONObject getCardDataCatCouple(String userId1, String userId2) throws RestClientException, ParseException, IOException {
+		List<CardDataDTO> cardData = getCardDataCouple(userId1, userId2);
+		JSONObject object = new JSONObject();
+		String cat = null;
+		for(CardDataDTO dto : cardData) {
+			cat = dto.getCat();
+			object.putIfAbsent(cat, new JSONArray());
+			((JSONArray) object.get(cat)).add(dto);
+		}
+		return object;
+	}	
 }
