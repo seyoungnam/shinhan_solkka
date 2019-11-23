@@ -17,4 +17,10 @@ public class SolkkaController {
 		System.out.println("@@@@@@@@@@@@@@@@@@@@");
 		return "asset";
 	}
+	
+	@RequestMapping("/conSelf")
+	public String conSelf() {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@");
+		return "conSelf";
+	}
 }
