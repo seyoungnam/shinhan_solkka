@@ -71,7 +71,7 @@
 							<li><a class="nav-link active" href="index.html#blog">Blog</a></li>
 							<li><a class="nav-link" href="index.html#contact">Contact
 									Us</a></li>
-							<li><a class="appao-btn" href="/conSpous">Download</a></li>
+							<li><a class="appao-btn" href="/couple">Download</a></li>
 						</ul>
 					</div>
 				</div>
@@ -85,8 +85,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="hero-area-content">
-						<h1>나의 소비 패턴</h1>
-						<p>나의 소비 성향</p>
+						<h1>배우자의 소비 패턴</h1>
+						<p>배우자의 소비 성향</p>
 					</div>
 				</div>
 			</div>
@@ -99,16 +99,16 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="blog-details">
-						<h4>지난 3개월간 월 평균 소득 : 4,000,000만원</h4>
+						<h4>배우자의 3개월간 소득 : 3,500,000만원</h4>
 						<br>
 						<hr>
 						<br>
-						<p>나의 소득 평균 소비</p>
+						<p>배우자의 소득 평균 소비</p>
 						<script type="text/javascript"
 							src="https://www.gstatic.com/charts/loader.js"></script>
 						<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 						<script type="text/javascript">
-							  var data = '{"userId":"boy2019", "income":"5000000"}'
+							  var data = '{"userId":"girl2019", "income":"5000000"}'
 							  var fistData = 0
 							  var second = 0
 							  axios.post("http://localhost:8000/getExpenseRate",JSON.parse(data)).then(resData => {
@@ -143,7 +143,7 @@
 							    function drawChart() {
 							      var data = google.visualization.arrayToDataTable([
 							        ["Element", "원", { role: "style" } ],
-							        ["내 지출", Math.ceil(fistData), "#b87333"],
+							        ["배우자 지출", Math.ceil(fistData), "#b87333"],
 							        ["평균 지출", Math.ceil(second), "gold"]
 							      ]);
 							
@@ -156,7 +156,7 @@
 							                       2]);
 							
 							      var options = {
-							        title: "-나와 소득이 비슷한 사람들은 이만큼 써요-",
+							        title: "-배우자와 소득이 비슷한 사람들은 이만큼 써요-",
 							        width: 600,
 							        height: 400,
 							        bar: {groupWidth: "95%"},

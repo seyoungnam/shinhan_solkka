@@ -8,19 +8,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SolkkaController {
 	@RequestMapping("/main")
 	public String login(@RequestParam(value="id") String id, @RequestParam(value="password") String pw) {
-		System.out.println("2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+id+pw);
 		return "main";
 	}
 	
 	@RequestMapping("/asset")
 	public String asset() {
-		System.out.println("@@@@@@@@@@@@@@@@@@@@");
 		return "asset";
 	}
 	
 	@RequestMapping("/conSelf")
 	public String conSelf() {
-		System.out.println("@@@@@@@@@@@@@@@@@@@@");
 		return "conSelf";
+	}
+	
+	@RequestMapping("/conSpous")
+	public String conSpous() {
+		return "conSpous";
+	}
+	
+	@RequestMapping("/couple")
+	public String couple() {
+		return "couple";
 	}
 }
