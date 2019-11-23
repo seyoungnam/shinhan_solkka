@@ -2,6 +2,7 @@ package solkka.model.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -59,5 +61,20 @@ public class ElasticSearchTool {
 		}
 		close();
 		return result;
+	}
+
+	public JSONArray searchId(String index, String idField, String userId) throws IOException {
+		connect();
+		System.out.println(index);
+		SearchRequest searchRequest = new SearchRequest(index);
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		sourceBuilder.query(QueryBuilders.matchQuery(idField, userId))
+				.size(1000);
+		searchRequest.source(sourceBuilder);
+		SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+		JSONArray array = new JSONArray();
+		Arrays.stream(searchResponse.getHits().getHits()).map(v -> v.getSourceAsMap()).forEach(v -> array.add(v));
+		close();
+		return array;
 	}
 }
