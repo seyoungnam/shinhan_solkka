@@ -1,0 +1,124 @@
+DELETE sample_card_credit
+
+PUT sample_card_credit
+{
+  "mappings": {
+    "properties": {
+      "userId": {
+        "type": "keyword"
+      },
+      "apprvId": {
+        "type": "long"
+      },
+      "storeId": {
+        "type": "keyword"
+      },
+      "apprvDate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "apprvAmount": {
+        "type": "integer"
+      },
+      "storeName": {
+        "type": "keyword"
+      }
+    }
+  }
+}
+
+POST sample_card_credit/_bulk
+{"index":{}}
+{"userId":"boy2019","apprvId":2,"storeId":"020000","apprvDate":"20190802","apprvAmount":50000,"storeName":"오늘와인한잔"}
+{"index":{}}
+{"userId":"boy2019","apprvId":3,"storeId":"030000","apprvDate":"20190803","apprvAmount":50000,"storeName":"아디다스"}
+{"index":{}}
+{"userId":"boy2019","apprvId":4,"storeId":"040000","apprvDate":"20190804","apprvAmount":60000,"storeName":"한국가스공사"}
+{"index":{}}
+{"userId":"boy2019","apprvId":5,"storeId":"050000","apprvDate":"20190805","apprvAmount":50000,"storeName":"바디프랜드"}
+{"index":{}}
+{"userId":"boy2019","apprvId":6,"storeId":"060000","apprvDate":"20190806","apprvAmount":80000,"storeName":"삼성의료원"}
+{"index":{}}
+{"userId":"boy2019","apprvId":7,"storeId":"070000","apprvDate":"20190807","apprvAmount":100000,"storeName":"서울지하철공사"}
+{"index":{}}
+{"userId":"boy2019","apprvId":8,"storeId":"080000","apprvDate":"20190808","apprvAmount":300000,"storeName":"KT"}
+{"index":{}}
+{"userId":"boy2019","apprvId":9,"storeId":"090000","apprvDate":"20190809","apprvAmount":50000,"storeName":"CGV"}
+{"index":{}}
+{"userId":"boy2019","apprvId":10,"storeId":"100000","apprvDate":"20190810","apprvAmount":200000,"storeName":"패스트캠퍼스"}
+{"index":{}}
+{"userId":"boy2019","apprvId":11,"storeId":"110000","apprvDate":"20190811","apprvAmount":300000,"storeName":"롯데호텔"}
+{"index":{}}
+{"userId":"boy2019","apprvId":12,"storeId":"120000","apprvDate":"20190812","apprvAmount":250000,"storeName":"아이템베이"}
+{"index":{}}
+{"userId":"boy2019","apprvId":13,"storeId":"010000","apprvDate":"20190905","apprvAmount":120000,"storeName":"GS수퍼마켓"}
+{"index":{}}
+{"userId":"boy2019","apprvId":14,"storeId":"020000","apprvDate":"20190906","apprvAmount":40000,"storeName":"술꾼"}
+{"index":{}}
+{"userId":"boy2019","apprvId":15,"storeId":"030000","apprvDate":"20190907","apprvAmount":100000,"storeName":"ABC마트"}
+{"index":{}}
+{"userId":"boy2019","apprvId":16,"storeId":"040000","apprvDate":"20190908","apprvAmount":40000,"storeName":"한국전력공사"}
+{"index":{}}
+{"userId":"boy2019","apprvId":17,"storeId":"050000","apprvDate":"20190909","apprvAmount":50000,"storeName":"집119"}
+{"index":{}}
+{"userId":"boy2019","apprvId":18,"storeId":"060000","apprvDate":"20190910","apprvAmount":40000,"storeName":"부민의원"}
+{"index":{}}
+{"userId":"boy2019","apprvId":19,"storeId":"070000","apprvDate":"20191003","apprvAmount":140000,"storeName":"경기버스"}
+{"index":{}}
+{"userId":"boy2019","apprvId":20,"storeId":"080000","apprvDate":"20191004","apprvAmount":90000,"storeName":"KT TV"}
+{"index":{}}
+{"userId":"boy2019","apprvId":21,"storeId":"090000","apprvDate":"20191005","apprvAmount":40000,"storeName":"CGV"}
+{"index":{}}
+{"userId":"boy2019","apprvId":22,"storeId":"100000","apprvDate":"20191006","apprvAmount":200000,"storeName":"조은컴퓨터학원"}
+{"index":{}}
+{"userId":"boy2019","apprvId":23,"storeId":"110000","apprvDate":"20191006","apprvAmount":120000,"storeName":"TGIF"}
+{"index":{}}
+{"userId":"boy2019","apprvId":24,"storeId":"120000","apprvDate":"20191007","apprvAmount":130000,"storeName":"Amazon"}
+{"index":{}}
+{"userId":"girl2019","apprvId":1,"storeId":"010000","apprvDate":"20190801","apprvAmount":200000,"storeName":"이마트"}
+{"index":{}}
+{"userId":"girl2019","apprvId":2,"storeId":"020000","apprvDate":"20190802","apprvAmount":10000,"storeName":"오늘와인한잔"}
+{"index":{}}
+{"userId":"girl2019","apprvId":3,"storeId":"030000","apprvDate":"20190803","apprvAmount":80000,"storeName":"아디다스"}
+{"index":{}}
+{"userId":"girl2019","apprvId":4,"storeId":"040000","apprvDate":"20190804","apprvAmount":30000,"storeName":"한국가스공사"}
+{"index":{}}
+{"userId":"girl2019","apprvId":5,"storeId":"050000","apprvDate":"20190805","apprvAmount":100000,"storeName":"바디프랜드"}
+{"index":{}}
+{"userId":"girl2019","apprvId":6,"storeId":"060000","apprvDate":"20190806","apprvAmount":12000,"storeName":"삼성의료원"}
+{"index":{}}
+{"userId":"girl2019","apprvId":7,"storeId":"070000","apprvDate":"20190807","apprvAmount":80000,"storeName":"서울지하철공사"}
+{"index":{}}
+{"userId":"girl2019","apprvId":8,"storeId":"080000","apprvDate":"20190808","apprvAmount":80000,"storeName":"KT"}
+{"index":{}}
+{"userId":"girl2019","apprvId":9,"storeId":"090000","apprvDate":"20190809","apprvAmount":70000,"storeName":"CGV"}
+{"index":{}}
+{"userId":"girl2019","apprvId":10,"storeId":"100000","apprvDate":"20190810","apprvAmount":150000,"storeName":"패스트캠퍼스"}
+{"index":{}}
+{"userId":"girl2019","apprvId":11,"storeId":"110000","apprvDate":"20190811","apprvAmount":200000,"storeName":"롯데호텔"}
+{"index":{}}
+{"userId":"girl2019","apprvId":12,"storeId":"120000","apprvDate":"20190812","apprvAmount":150000,"storeName":"아이템베이"}
+{"index":{}}
+{"userId":"girl2019","apprvId":13,"storeId":"010000","apprvDate":"20190905","apprvAmount":200000,"storeName":"GS수퍼마켓"}
+{"index":{}}
+{"userId":"girl2019","apprvId":14,"storeId":"020000","apprvDate":"20190906","apprvAmount":80000,"storeName":"술꾼"}
+{"index":{}}
+{"userId":"girl2019","apprvId":15,"storeId":"030000","apprvDate":"20190907","apprvAmount":150000,"storeName":"ABC마트"}
+{"index":{}}
+{"userId":"girl2019","apprvId":16,"storeId":"040000","apprvDate":"20190908","apprvAmount":30000,"storeName":"한국전력공사"}
+{"index":{}}
+{"userId":"girl2019","apprvId":17,"storeId":"050000","apprvDate":"20190909","apprvAmount":100000,"storeName":"집119"}
+{"index":{}}
+{"userId":"girl2019","apprvId":18,"storeId":"060000","apprvDate":"20190910","apprvAmount":20000,"storeName":"부민의원"}
+{"index":{}}
+{"userId":"girl2019","apprvId":19,"storeId":"070000","apprvDate":"20191003","apprvAmount":130000,"storeName":"경기버스"}
+{"index":{}}
+{"userId":"girl2019","apprvId":20,"storeId":"080000","apprvDate":"20191004","apprvAmount":40000,"storeName":"KT TV"}
+{"index":{}}
+{"userId":"girl2019","apprvId":21,"storeId":"090000","apprvDate":"20191005","apprvAmount":40000,"storeName":"CGV"}
+{"index":{}}
+{"userId":"girl2019","apprvId":22,"storeId":"100000","apprvDate":"20191006","apprvAmount":250000,"storeName":"조은컴퓨터학원"}
+{"index":{}}
+{"userId":"girl2019","apprvId":23,"storeId":"110000","apprvDate":"20191006","apprvAmount":60000,"storeName":"TGIF"}
+{"index":{}}
+{"userId":"girl2019","apprvId":24,"storeId":"120000","apprvDate":"20191007","apprvAmount":250000,"storeName":"Amazon"}
