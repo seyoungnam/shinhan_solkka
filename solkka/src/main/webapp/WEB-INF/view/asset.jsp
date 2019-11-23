@@ -161,7 +161,7 @@
 							<li><a class="nav-link" href="#team">Team</a></li>
 							<li><a class="nav-link" href="#blog">Blog</a></li>
 							<li><a class="nav-link" href="#contact">Contact Us</a></li>
-							<li><a class="appao-btn" href="#">Download</a></li>
+							<li><a class="appao-btn" href="/conSelf">세부 내역 보기</a></li>
 						</ul>
 					</div>
 				</div>
@@ -177,9 +177,8 @@
 					<div class="hero-area-content">
 						<h1>한눈에 볼 수 있는 자산 현황 관리 Flatform</h1>
 						<p>
-							행복한 미래를 위하여!<br> 부부 사이에도 투명한 자산관리를 위하여! <br> 오빠 나 못 믿어?
+							독박 재테크 탈출! <br> 부부 사이에도 투명한 자산관리를 위하여! <br>
 						</p>
-						<a href="#" class="appao-btn">음음음</a>
 						<!-- <a href="#" class="appao-btn">App Store</a> -->
 					</div>
 				</div>
@@ -231,133 +230,16 @@
 				<div class="single-showcase-box">
 					<div id="chart-container" default></div>
 				</div>
-			</div>
-		</div>
-		</div>
 		<div id="api"></div>
 		<div id="barchart_material1" style="width: 900px; height: 500px;"></div>
 		<br><hr><br>	
 		<div id="barchart_material2" align="center" style="width: 900px; height: 200px;"></div>
+			</div>
+		</div>
 	</section>
 	<!-- showcase section end -->
 	<!-- pricing section start -->
-	<section class="pricing-area ptb-90" id="pricing">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="sec-title">
-						<h2>
-							신한 은행 추천 금융 상품<span class="sec-title-border"><span></span><span></span><span></span></span>
-						</h2>
-						<p>당신의 목표를 이루기 위하여 아래 상품을 추천드립니다.</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="single-pricing-box">
-						<div class="pricing-top">
-							<h4>신한 첫급여 드림(DREAM) 적금</h4>
-							<p>적금상품</p>
-						</div>
-						<div class="price">
-							<h1>
-								<span>%</span>1.2 ~ 1.5
-							</h1>
-							<p>연이율</p>
-						</div>
-						<div class="price-details">
-							<ul>
-								<li>Email Marketing</li>
-								<li>Email Builder</li>
-								<li>Client Testing</li>
-								<li>Multiple Email Support</li>
-								<li>Email Read Receipent</li>
-								<li>2 User Free</li>
-							</ul>
-							<a class="appao-btn" href="#">Order Now</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-pricing-box">
-						<div class="pricing-top">
-							<h4>Pro</h4>
-							<p>Suitable for Freelancer</p>
-						</div>
-						<div class="price">
-							<h1>
-								<span>$</span>199
-							</h1>
-							<p>Basic</p>
-						</div>
-						<div class="price-details">
-							<ul>
-								<li>Email Marketing</li>
-								<li>Email Builder</li>
-								<li>Client Testing</li>
-								<li>Multiple Email Support</li>
-								<li>Email Read Receipent</li>
-								<li>2 User Free</li>
-							</ul>
-							<a class="appao-btn" href="#">Order Now</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-pricing-box">
-						<div class="pricing-top">
-							<h4>Ultimate</h4>
-							<p>Suitable for Freelancer</p>
-						</div>
-						<div class="price">
-							<h1>
-								<span>$</span>299
-							</h1>
-							<p>Basic</p>
-						</div>
-						<div class="price-details">
-							<ul>
-								<li>Email Marketing</li>
-								<li>Email Builder</li>
-								<li>Client Testing</li>
-								<li>Multiple Email Support</li>
-								<li>Email Read Receipent</li>
-								<li>2 User Free</li>
-							</ul>
-							<a class="appao-btn" href="#">Order Now</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- pricing section end -->
-	<!-- testimonial section start -->
-	<a href="#" class="scrollToTop"> <i
-		class="icofont icofont-arrow-up"></i>
-	</a>
-	<div class="switcher-area" id="switch-style">
-		<div class="display-table">
-			<div class="display-tablecell">
-				<a class="switch-button" id="toggle-switcher"><i
-					class="icofont icofont-wheel"></i></a>
-				<div class="switched-options">
-					<div class="config-title">Home variation:</div>
-					<ul>
-						<li class="active"><a href="index.html">Home - Fixed Text</a></li>
-						<li><a href="index-slider.html">Home - Slider Effect</a></li>
-						<li><a href="index-video.html">Home - Video Background</a></li>
-					</ul>
-					<div class="config-title">Other Pages</div>
-					<ul>
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="blog-detail.html">Blog Details</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.slicknav.min.js"></script>

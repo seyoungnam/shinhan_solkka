@@ -154,11 +154,9 @@ google.charts.load("current", {packages:['corechart']});
 							<li><a class="nav-link" href="index.html#feature">Feature</a></li>
 							<li><a class="nav-link" href="index.html#screenshot">Screenshot</a></li>
 							<li><a class="nav-link" href="index.html#pricing">Pricing</a></li>
-							<li><a class="nav-link" href="index.html#team">Team</a></li>
-							<li><a class="nav-link active" href="index.html#blog">Blog</a></li>
 							<li><a class="nav-link" href="index.html#contact">Contact
 									Us</a></li>
-							<li><a class="appao-btn" href="/conSpous">Download</a></li>
+							<li><a class="appao-btn" href="/conSpous">배우자 소비패턴 보기</a></li>
 						</ul>
 					</div>
 				</div>

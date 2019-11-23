@@ -166,11 +166,9 @@ google.charts.load("current", {packages:['corechart']});
 							<li><a class="nav-link" href="index.html#feature">Feature</a></li>
 							<li><a class="nav-link" href="index.html#screenshot">Screenshot</a></li>
 							<li><a class="nav-link" href="index.html#pricing">Pricing</a></li>
-							<li><a class="nav-link" href="index.html#team">Team</a></li>
-							<li><a class="nav-link active" href="index.html#blog">Blog</a></li>
 							<li><a class="nav-link" href="index.html#contact">Contact
 									Us</a></li>
-							<li><a class="appao-btn" href="#">Download</a></li>
+							<li><a class="appao-btn" href="/asset">세부 내역 보기</a></li>
 						</ul>
 					</div>
 				</div>
@@ -203,9 +201,9 @@ google.charts.load("current", {packages:['corechart']});
 						<hr>
 						<br>
 						<p>부부의 소득 평균 소비</p>
-						<button onclick="getGraph()" class="appao-btn appao-btn2">배우자의
+						<button onclick="getGraph()" class="appao-btn appao-btn2">우리 부부의
 							소비 패턴 그래프 보기</button>
-						<button onclick="getTable()" class="appao-btn appao-btn2">배우자의
+						<button onclick="getTable()" class="appao-btn appao-btn2">신혼 부부의
 							소비 내역 보기</button>
 						<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
 					</div>
