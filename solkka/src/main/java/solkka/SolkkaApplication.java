@@ -15,5 +15,7 @@ public class SolkkaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SolkkaApplication.class, args);
 	}
+	
+	
 
 }

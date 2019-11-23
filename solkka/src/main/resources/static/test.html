@@ -1,20 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TEST</title>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+function man(){
+    axios.post("http://localhost:8000/man")
+    .then(resData => {
+               console.log(resData);
+    }).catch(error => {
+          console.log("비정상 응답 ", error);
+    });
+    document.getElementById("printhistogram").innerHTML ="<img src=\"../img/man.jpg\" width = 550px height = 400px >"
+}
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>TEST</title>
 </head>
 <body>
-<h3>테스트 페이지</h3>
-<table>
-<tr><td>아이유</td></tr>
-<tr><td><img width="240px" src="https://file.namu.moe/file/2865192d3c79add96ca127a808e9890b5f194e0aff22a1dc90506adbb573b44c82bbe2c4f7f8a637fe6afd3a42919063" alt="아이유"></td></tr>
-</table>
-<button onclick="callAPI()">API TEST</button>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="js/test.js"></script>
-<div id="api"></div>
+	<h3>테스트 페이지</h3>
+	<table>
+		<tr>
+			<td>아이유</td>
+		</tr>
+		<tr>
+			<td><img width="240px"
+				src="https://file.namu.moe/file/2865192d3c79add96ca127a808e9890b5f194e0aff22a1dc90506adbb573b44c82bbe2c4f7f8a637fe6afd3a42919063"
+				alt="아이유"></td>
+		</tr> 	
+	</table>
+	<a href="/recommend">추천 투자 비율</a>
+	<button onclick="javascript:man()">남성의 별 그래프</button>
+	<a href="/woman">여성의 별 그래프</a>
+	<a href="/dual">합친 별 그래프</a>
+	<a href="/standardized">표준화된 그래프</a>
+	<div id="api"></div>
+	여기여기
+	<p id="printhistogram"></p>
+	여기여기
 </body>
 </html>
