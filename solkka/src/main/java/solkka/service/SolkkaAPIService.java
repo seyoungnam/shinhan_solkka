@@ -12,7 +12,7 @@ import org.springframework.web.client.RestClientException;
 import solkka.model.util.ApiTool;
 
 @Service
-public class SolkkaService {
+public class SolkkaAPIService {
 	@Autowired
 	ApiTool apiTool;
 //	[전체 계좌 조회] {"number":"901212-1*****"}
@@ -179,12 +179,12 @@ public class SolkkaService {
 		return result;
 	}
 //	[(체크)국내사용내역조회 - 체크 승인] {"period":"2019050720190805"}
-	public JSONObject usedDebit(String perioid) throws RestClientException, ParseException {
+	public JSONObject usedDebit(String period) throws RestClientException, ParseException {
 //		{"dataHeader":{},"dataBody":{"nxtQyKey":"","bctag":"0","inqterm":"2019050720190805"}}
 		Map<String, Object> dataBodyMap = new HashMap<>();
 		dataBodyMap.put("nxtQyKey", "");
 		dataBodyMap.put("bctag", "0");
-		dataBodyMap.put("inqterm", perioid);
+		dataBodyMap.put("inqterm", period);
 		Map<String, Object> dataMap = new HashMap<>();
 		dataMap.put("dataHeader", new JSONObject());
 		dataMap.put("dataBody", dataBodyMap);
@@ -194,11 +194,11 @@ public class SolkkaService {
 		return result;
 	}
 //	[(신용)국내사용내역조회 - 일시불/할부] {"period":"2019050720190805"}
-	public JSONObject usedCredit(String perioid) throws RestClientException, ParseException {
+	public JSONObject usedCredit(String period) throws RestClientException, ParseException {
 //		{"dataHeader":{},"dataBody":{"nxtQyKey":"","inqterm":"2019050720190805","bctag":"0"}}
 		Map<String, Object> dataBodyMap = new HashMap<>();
 		dataBodyMap.put("nxtQyKey", "");
-		dataBodyMap.put("inqterm", perioid);
+		dataBodyMap.put("inqterm", period);
 		dataBodyMap.put("bctag", "0");
 		Map<String, Object> dataMap = new HashMap<>();
 		dataMap.put("dataHeader", new JSONObject());
